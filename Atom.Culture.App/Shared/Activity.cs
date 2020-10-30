@@ -1,5 +1,4 @@
-﻿using Consonance.Abstractions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 namespace Atom.Culture.App.Shared
 {
     [Serializable]
-    public class Activity : IAlternative
+    public class Activity 
     {
         public string Id { get; set; }
         public string Name { get; set; }
