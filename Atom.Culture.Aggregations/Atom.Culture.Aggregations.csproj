@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>Preview</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="D:\Repos\consonance\Source\Consonance.Abstractions\Consonance.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

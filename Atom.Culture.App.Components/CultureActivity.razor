@@ -1,0 +1,31 @@
+﻿@using Atom.Culture.App.Shared
+@using Syncfusion.Blazor.Buttons;
+@using Syncfusion.Blazor.Popups
+
+<SfTooltip CssClass="e-tooltip-css" OpensOn="Click">
+    <TooltipTemplates>
+        <Content>
+            <div id='democontent' class='democontent'>
+                <div class='info'>
+                    <h3 style='margin-top:10px'>Eastern Bluebird </h3><hr style='margin-top:10px'>
+                    <div style='margin-top: -10px'>
+                        <div style='float:left;width:57%'>
+                            The<a href='https://hack2020.innoagency.ru/' target='blank'> Eastern Bluebird</a>
+                            is easily found in open fields and sparse woodland areas, including along woodland edges.These are<i>cavity-nesting birds</i>and a pair of eastern bluebirds will raise 2-3 broods annually, with 2-8 light blue or whitish eggs per brood.
+                        </div>
+                        <div id='bird' style='float:right;width:42%'><img src='images/tooltip/bird.png' width='125' height='125' /></div>
+                    </div>
+                    <div style='margin-top:160px'>
+                        <hr><p style='margin-top:-11px'> Eastern bluebirds can be very vocal in flocks.Their calls include a rapid, mid-tone chatter and several long dropping pitch calls.</p>
+                    </div><p>Source:<br><a href='https://hack2020.innoagency.ru/' target='_blank'>https://hack2020.innoagency.ru/</a></p>
+                </div>
+            </div>
+        </Content>
+    </TooltipTemplates>
+    <SfButton CssClass="e-outline text" IsPrimary="true" Content="HTML Template"></SfButton>
+</SfTooltip>
+
+@code {
+    [Parameter]
+    public Activity activity { get; set; }
+}

@@ -1,0 +1,25 @@
+﻿using Consonance.Abstractions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Atom.Culture.App.Shared
+{
+    [Serializable]
+    public class Activity : IAlternative
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Address { get; set; }
+        public string Source { get; set; }
+        public DateTime DateStart { get; set; }
+        public DateTime DateFinish { get; set; }
+        public double PriceForPerson { get; set; }
+        public int CountPeople { get; set; }
+        public string[] Tags { get; set; }
+
+    }
+}

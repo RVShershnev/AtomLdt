@@ -1,0 +1,83 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30615.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Atom.Culture.Aggregations", "Atom.Culture.Aggregations\Atom.Culture.Aggregations.csproj", "{84D6A6AC-97F7-469F-9870-BDEDFCED0256}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Atom.Culture.Recomendations", "Atom.Culture.Recomendations\Atom.Culture.Recomendations.csproj", "{EA25F916-93AE-41D6-AC35-E0C280DB7E83}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Atom.Culture.App.Server", "Atom.Culture.App\Server\Atom.Culture.App.Server.csproj", "{1E270D52-D0A4-4A3F-A251-AFC532A40658}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Atom.Culture.App.Client", "Atom.Culture.App\Client\Atom.Culture.App.Client.csproj", "{311AC486-205A-4935-8E5F-5BF829FA7A9D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Atom.Culture.App.Shared", "Atom.Culture.App\Shared\Atom.Culture.App.Shared.csproj", "{61AE46BF-A9DB-4160-A4E3-8449AAE4916F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{09F9A51B-A667-42AB-A368-B65ADEF0DD4A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Consonance.Abstractions", "D:\Repos\consonance\Source\Consonance.Abstractions\Consonance.Abstractions.csproj", "{D9FEF584-2CE6-4982-94D1-5631FE016E68}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Aggregations", "Aggregations", "{F5D19FAF-2E18-4CC1-8B77-0C96860476AB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Recomendations", "Recomendations", "{C33CB674-DCB8-45C9-825A-D2B30466CDC6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Atom.GDM.InternalPromethee", "D:\Repos\consonance\Source\Atom.GDM.InternalPromethee\Atom.GDM.InternalPromethee.csproj", "{5BF00AEF-88D4-4432-A1BF-A1234600878E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Atom.Culture.App.Components", "Atom.Culture.App.Components\Atom.Culture.App.Components.csproj", "{A65123F5-9804-43B5-8143-DE226F4D0F56}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{84D6A6AC-97F7-469F-9870-BDEDFCED0256}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84D6A6AC-97F7-469F-9870-BDEDFCED0256}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84D6A6AC-97F7-469F-9870-BDEDFCED0256}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84D6A6AC-97F7-469F-9870-BDEDFCED0256}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA25F916-93AE-41D6-AC35-E0C280DB7E83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA25F916-93AE-41D6-AC35-E0C280DB7E83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA25F916-93AE-41D6-AC35-E0C280DB7E83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA25F916-93AE-41D6-AC35-E0C280DB7E83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E270D52-D0A4-4A3F-A251-AFC532A40658}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E270D52-D0A4-4A3F-A251-AFC532A40658}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E270D52-D0A4-4A3F-A251-AFC532A40658}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E270D52-D0A4-4A3F-A251-AFC532A40658}.Release|Any CPU.Build.0 = Release|Any CPU
+		{311AC486-205A-4935-8E5F-5BF829FA7A9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{311AC486-205A-4935-8E5F-5BF829FA7A9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{311AC486-205A-4935-8E5F-5BF829FA7A9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{311AC486-205A-4935-8E5F-5BF829FA7A9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61AE46BF-A9DB-4160-A4E3-8449AAE4916F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61AE46BF-A9DB-4160-A4E3-8449AAE4916F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61AE46BF-A9DB-4160-A4E3-8449AAE4916F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61AE46BF-A9DB-4160-A4E3-8449AAE4916F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9FEF584-2CE6-4982-94D1-5631FE016E68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9FEF584-2CE6-4982-94D1-5631FE016E68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9FEF584-2CE6-4982-94D1-5631FE016E68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9FEF584-2CE6-4982-94D1-5631FE016E68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BF00AEF-88D4-4432-A1BF-A1234600878E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BF00AEF-88D4-4432-A1BF-A1234600878E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BF00AEF-88D4-4432-A1BF-A1234600878E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BF00AEF-88D4-4432-A1BF-A1234600878E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A65123F5-9804-43B5-8143-DE226F4D0F56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A65123F5-9804-43B5-8143-DE226F4D0F56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A65123F5-9804-43B5-8143-DE226F4D0F56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A65123F5-9804-43B5-8143-DE226F4D0F56}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{84D6A6AC-97F7-469F-9870-BDEDFCED0256} = {F5D19FAF-2E18-4CC1-8B77-0C96860476AB}
+		{EA25F916-93AE-41D6-AC35-E0C280DB7E83} = {C33CB674-DCB8-45C9-825A-D2B30466CDC6}
+		{1E270D52-D0A4-4A3F-A251-AFC532A40658} = {09F9A51B-A667-42AB-A368-B65ADEF0DD4A}
+		{311AC486-205A-4935-8E5F-5BF829FA7A9D} = {09F9A51B-A667-42AB-A368-B65ADEF0DD4A}
+		{61AE46BF-A9DB-4160-A4E3-8449AAE4916F} = {09F9A51B-A667-42AB-A368-B65ADEF0DD4A}
+		{D9FEF584-2CE6-4982-94D1-5631FE016E68} = {F5D19FAF-2E18-4CC1-8B77-0C96860476AB}
+		{5BF00AEF-88D4-4432-A1BF-A1234600878E} = {F5D19FAF-2E18-4CC1-8B77-0C96860476AB}
+		{A65123F5-9804-43B5-8143-DE226F4D0F56} = {09F9A51B-A667-42AB-A368-B65ADEF0DD4A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AECAC3F5-F971-40C2-8779-E0E3CBB6EF11}
+	EndGlobalSection
+EndGlobal
