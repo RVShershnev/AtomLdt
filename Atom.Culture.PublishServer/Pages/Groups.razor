@@ -1,12 +1,13 @@
-﻿@page "/counter"
-           
-<h3>Групповая подборка</h3>
+﻿@page "/groups"
+
+<h1>Групповая подборка</h1>
 @using Atom.CultureShared
+@inject Atom.Culture.PublishServer.Services.ManageService ManageService
 
 <div class="col-lg-12 control-section">
     <div class="content-wrapper">
         <div class="row">
-            <h2>Группа</h2>
+            <h3>Группа</h3>
             <SfTextBox Value="@idFriend"></SfTextBox>
             <SfButton class="btn btn-primary" OnClick="AddFriend">Добавить друга</SfButton>
             <SfGrid @ref="sfGrid" TValue="Person" DataSource="@group.Persons" AllowPaging="true">
@@ -23,30 +24,36 @@
                     </GridColumn>
                 </GridColumns>
             </SfGrid>
-        </div>
+        </div>        
         <div class="row">
-            <SfButton class="btn btn-primary" OnClick="GetPerson">
-                Получить подборку
-            </SfButton>
+            <h3>Подборки</h3>
         </div>
-        <div class="row">
-            <h2>Подборки</h2>
-        </div>
-        <div class="row">
-            <SfGrid DataSource="@group.Recomendations" AllowPaging="true">
-                <GridEditSettings AllowAdding="true" AllowDeleting="true" AllowEditing="true"></GridEditSettings>
-                <GridColumns>
-                    <GridColumn Field=@nameof(IRecomendation.Id) HeaderText="Id" EditType="EditType.DatePickerEdit" Format="d" Type="ColumnType.Date" TextAlign="TextAlign.Right" Width="160"></GridColumn>
-                    <GridColumn Field=@nameof(IRecomendation.Name) HeaderText="Название" IsPrimaryKey="true" ValidationRules="@(new ValidationRules{ Required=true, Number=true})" TextAlign="TextAlign.Right" Width="140"></GridColumn>
-                    <GridColumn Field=@nameof(IRecomendation.Price) HeaderText="Цена" ValidationRules="@(new ValidationRules{ Required=true})" Width="150"></GridColumn>
-                    <GridColumn HeaderText="Manage Records" Width="150">
-                        <GridCommandColumns>
-                            <GridCommandColumn Type="CommandButtonType.Delete" ButtonOption="@(new CommandButtonOptions() {IconCss="e-icons e-delete", CssClass="e-flat" })"></GridCommandColumn>
-                        </GridCommandColumns>
-                    </GridColumn>
-                </GridColumns>
-            </SfGrid>
-        </div>
+        @if (group.Recomendations != null && group.Recomendations.Count > 0)
+        {
+            <div class="row">
+                <SfGrid DataSource="@group.Recomendations" AllowPaging="true">
+                    <GridEditSettings AllowAdding="true" AllowDeleting="true" AllowEditing="true"></GridEditSettings>
+                    <GridColumns>
+                        <GridColumn Field=@nameof(IRecomendation.Id) HeaderText="Id" EditType="EditType.DatePickerEdit" Format="d" Type="ColumnType.Date" TextAlign="TextAlign.Right" Width="160"></GridColumn>
+                        <GridColumn Field=@nameof(IRecomendation.Name) HeaderText="Название" IsPrimaryKey="true" ValidationRules="@(new ValidationRules { Required = true, Number = true })" TextAlign="TextAlign.Right" Width="140"></GridColumn>
+                        <GridColumn Field=@nameof(IRecomendation.Price) HeaderText="Цена" ValidationRules="@(new ValidationRules { Required = true })" Width="150"></GridColumn>
+                        <GridColumn HeaderText="Manage Records" Width="150">
+                            <GridCommandColumns>
+                                <GridCommandColumn Type="CommandButtonType.Delete" ButtonOption="@(new CommandButtonOptions() { IconCss = "e-icons e-delete", CssClass = "e-flat" })"></GridCommandColumn>
+                            </GridCommandColumns>
+                        </GridColumn>
+                    </GridColumns>
+                </SfGrid>
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                <SfButton class="btn btn-primary" OnClick="GetRecomendation">
+                    Получить подборку
+                </SfButton>
+            </div>
+        }
     </div>
 </div>
 
@@ -58,18 +65,29 @@
 
     SfGrid<Person> sfGrid;
 
-    private void AddFriend()
+    private async Task AddFriend()
     {
-        // добавить друга, сделать вызов на бек.
+        // добавить друга, сделать вызов на бек.      
         string id = idFriend;
-        var person = new Person { Id = id, Age = "18", Name = "Новый" };
+        var person = await ManageService.FindPerson(id);
+        if(person != null)
+        {
+
+        }
+        group.Persons.Add(person);
+        sfGrid.Refresh();
+    }
+    private async Task GetRecomendation()
+    {
+        // добавить друга, сделать вызов на бек.      
+        string id = idFriend;
+        var person = await ManageService.FindPerson(id);
+        if (person != null)
+        {
+
+        }
         group.Persons.Add(person);
         sfGrid.Refresh();
     }
 
-    public async Task GetPerson()
-    {
-        // var result = await Http.PostAsJsonAsync<Group>($"api/Recomendation", group);
-        // var s = result.Content;
-    }
 }

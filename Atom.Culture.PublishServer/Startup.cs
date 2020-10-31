@@ -1,6 +1,7 @@
 using Atom.Culture.App.Data.Interfaces;
 using Atom.Culture.App.Data.Mongo;
 using Atom.Culture.PublishServer.Data;
+using Atom.Culture.PublishServer.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
@@ -46,6 +47,8 @@ namespace Atom.Culture.PublishServer
             services.AddScoped<NotificationService>();
             services.AddScoped<TooltipService>();
             services.AddScoped<ContextMenuService>();
+
+            services.AddSingleton<ManageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
