@@ -14,6 +14,9 @@ namespace Atom.Culture.App.Data.Mongo
         private IRepository<Book> books;
         private IRepository<Service> services;
         private IRepository<Organization> organizations;
+        private IRepository<Issue> issues;
+        private IRepository<Instance> instances;
+        private IRepository<Reader> readrs;
 
         public MongoUnitOfWork(string connectionString, string dbName)
         {
@@ -57,6 +60,36 @@ namespace Atom.Culture.App.Data.Mongo
                 if (organizations == null)
                     organizations = new OrganizationsRepository(mongoContext);
                 return organizations;
+            }
+        }
+
+        public IRepository<Instance> Instances
+        {
+            get
+            {
+                if (instances == null)
+                    instances = new InstanceRepository(mongoContext);
+                return instances;
+            }
+        }
+
+        public IRepository<Issue> Issues
+        {
+            get
+            {
+                if (issues == null)
+                    issues = new IssuesRepository(mongoContext);
+                return issues;
+            }
+        }
+
+        public IRepository<Reader> Readers
+        {
+            get
+            {
+                if (readrs == null)
+                    readrs = new ReadersRepository(mongoContext);
+                return readrs;
             }
         }
 
