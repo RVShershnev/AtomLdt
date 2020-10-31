@@ -1,5 +1,7 @@
 using Atom.Culture.App.Data;
 using Atom.Culture.App.Data.Interfaces;
+using Atom.Culture.App.Data.Models;
+using Atom.Culture.App.Data.Mongo;
 using Atom.Culture.App.Data.Services;
 using Atom.Culture.App.Server.Data;
 using Atom.Culture.App.Server.Models;
@@ -25,14 +27,12 @@ namespace Atom.Culture.App.Server
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IPersonsService, PersonsService>(x =>
-            {
-                return new PersonsService(Configuration["Database:ConnectionString"], Configuration["Database:DbName"]);
-            });
+            services.AddTransient<IUnitOfWork, MongoUnitOfWork>(x =>
+             {
+                 return new MongoUnitOfWork(Configuration["Database:ConnectionString"], Configuration["Database:DbName"]);
+             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
@@ -54,9 +54,10 @@ namespace Atom.Culture.App.Server
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IPersonsService personsService)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IUnitOfWork unitOfWork)
         {
-            var person = personsService.Get("179");
+            var person = unitOfWork.Persons.Get("179");
+            var events = unitOfWork.Events.Where(x => x.EventType.Equals("фестиваль"));
 
             if (env.IsDevelopment())
             {

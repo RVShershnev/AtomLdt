@@ -78,5 +78,21 @@ namespace Atom.Culture.App.Data.Mongo
                 return db.GetCollection<Pupil>("Pupils");
             }
         }
+
+        public IMongoCollection<Request> Requests
+        {
+            get
+            {
+                return db.GetCollection<Request>("Requests");
+            }
+        }
+
+        public IMongoCollection<Classificator> Classificators
+        {
+            get
+            {
+                return db.GetCollection<Classificator>("Classificators");
+            }
+        }
     }
 }

@@ -7,13 +7,23 @@ using System.Linq;
 
 namespace Atom.Culture.App.Data.Services
 {
-    public class PersonsService : IPersonsService
+    public class PersonsService : IEntityService<Person>
     {
         MongoContext mongo;
 
-        public PersonsService(string connectionString, string dbName)
+        public PersonsService(MongoContext mongo)
         {
-            mongo = new MongoContext(connectionString, dbName);
+            this.mongo = mongo;
+        }
+
+        public void Create(Person item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(Person item)
+        {
+            throw new NotImplementedException();
         }
 
         public Person Get(string id)
@@ -29,6 +39,11 @@ namespace Atom.Culture.App.Data.Services
                 Books = books
             };
             return person;
+        }
+
+        public void Update(Person item)
+        {
+            throw new NotImplementedException();
         }
     }
 }
