@@ -94,5 +94,29 @@ namespace Atom.Culture.App.Data.Mongo
                 return db.GetCollection<Classificator>("Classificators");
             }
         }
+
+        public IMongoCollection<MegaRelation> MegaRelations
+        {
+            get
+            {
+                return db.GetCollection<MegaRelation>("MegaRelations");
+            }
+        }
+
+        public IMongoCollection<Person> Persons
+        {
+            get
+            {
+                return db.GetCollection<Person>("Persons");
+            }
+        }
+
+        public IMongoCollection<Participiant> Participiants
+        {
+            get
+            {
+                return db.GetCollection<Participiant>("Participiants");
+            }
+        }
     }
 }

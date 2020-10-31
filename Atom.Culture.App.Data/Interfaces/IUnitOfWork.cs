@@ -14,6 +14,7 @@ namespace Atom.Culture.App.Data.Interfaces
         IRepository<Reader> Readers { get;}
         IRepository<Request> Requests { get;}
         IRepository<Service> Services { get;}
+        IRepository<MegaRelation> MegaRelations { get;}
         IEntityService<Person> Persons { get; }
         IEntityService<Participiant> Participiants { get; }
     }

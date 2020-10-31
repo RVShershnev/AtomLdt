@@ -17,6 +17,7 @@ namespace Atom.Culture.App.Data.Mongo
         private IRepository<Reader> readers;
         private IRepository<Request> requests;
         private IRepository<Service> services;
+        private IRepository<MegaRelation> megaRelations;
         private IEntityService<Person> persons;
         private IEntityService<Participiant> participians;
         private MongoContext mongoContext;
@@ -124,6 +125,16 @@ namespace Atom.Culture.App.Data.Mongo
                 if (services == null)
                     services = new ServicesRepository(mongoContext);
                 return services;
+            }
+        }
+
+        public IRepository<MegaRelation> MegaRelations
+        {
+            get
+            {
+                if (megaRelations == null)
+                    megaRelations = new MegaRelationRepository(mongoContext);
+                return megaRelations;
             }
         }
 

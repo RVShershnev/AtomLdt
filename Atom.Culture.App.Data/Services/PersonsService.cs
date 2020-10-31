@@ -18,15 +18,29 @@ namespace Atom.Culture.App.Data.Services
 
         public void Create(Person item)
         {
-            throw new NotImplementedException();
+            item.LastUpdate = DateTime.Now;
+            mongo.Persons.InsertOne(item);
         }
 
-        public void Delete(Person item)
+        public void Update(Person item)
         {
-            throw new NotImplementedException();
+            item.LastUpdate = DateTime.Now;
+            mongo.Persons.ReplaceOne(Builders<Person>.Filter.Eq(s => s.Id, item.Id), item);
+        }
+
+        public void Delete(string id)
+        {
+            var filter = Builders<Person>.Filter.Eq(s => s.Id, id);
+            mongo.Persons.DeleteOne(filter);
         }
 
         public Person Get(string id)
+        {
+            var filter = Builders<Person>.Filter.Eq(s => s.Id, id);
+            return mongo.Persons.Find(filter).FirstOrDefault();
+        }
+
+        public Person GetFromDataset(string id)
         {
             var reader = mongo.Readers.Find(Builders<Reader>.Filter.Eq(x => x.ReaderId, id)).FirstOrDefault();
             var issues = mongo.Issues.Find(Builders<Issue>.Filter.Eq(x => x.ReaderIs, reader.ReaderId)).ToList().Select(x => x.BarCode);
@@ -39,11 +53,6 @@ namespace Atom.Culture.App.Data.Services
                 Books = books
             };
             return person;
-        }
-
-        public void Update(Person item)
-        {
-            throw new NotImplementedException();
         }
     }
 }
