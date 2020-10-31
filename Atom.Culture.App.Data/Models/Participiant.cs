@@ -1,10 +1,12 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 
 namespace Atom.Culture.App.Data.Models
 {
     public class Participiant
     {
+        [BsonId]
         public string Id { get; set; }
         public string Age { get; set; }
         public string Sex { get; set; }
