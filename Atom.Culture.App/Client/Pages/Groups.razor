@@ -1,21 +1,23 @@
-﻿@page "/counter"
+﻿@page "/groups"
 <h3>Групповая подборка</h3>
 @using Atom.Culture.App.Shared
 @using Syncfusion.Blazor.Grids
 @inject NavigationManager NavigationManager
+@inject HttpClient Http
 
 <div class="col-lg-12 control-section">
     <div class="content-wrapper">
         <div class="row">
-            <SfTextBox Value="idFriend"></SfTextBox>
+            <h2>Группа</h2>
+            <SfTextBox Value="@idFriend"></SfTextBox>
             <SfButton class="btn btn-primary" OnClick="AddFriend">Добавить друга</SfButton>
-            <SfGrid DataSource="@group.Persons" AllowPaging="true">
+            <SfGrid @ref="sfGrid" TValue="Person" DataSource="@group.Persons" AllowPaging="true">
                 <GridEditSettings AllowAdding="true" AllowDeleting="true" AllowEditing="true"></GridEditSettings>
                 <GridColumns>
-                    <GridColumn Field=@nameof(Person.Id) HeaderText="Order Date" EditType="EditType.DatePickerEdit" Format="d" Type="ColumnType.Date" TextAlign="TextAlign.Right" Width="160"></GridColumn>
-                    <GridColumn Field=@nameof(Person.Name) HeaderText="Order ID" IsPrimaryKey="true" ValidationRules="@(new ValidationRules{ Required=true, Number=true})" TextAlign="TextAlign.Right" Width="140"></GridColumn>
-                    <GridColumn Field=@nameof(Person.Email) HeaderText="Customer Name" ValidationRules="@(new ValidationRules{ Required=true})" Width="150"></GridColumn>
-                    <GridColumn Field=@nameof(Person.Age) HeaderText="Freight" ValidationRules="@(new ValidationRules{ Required=true, Range = new double[]{1, 1000}})" EditType="EditType.NumericEdit" Format="C2" TextAlign="TextAlign.Right" Width="140"></GridColumn>
+                    <GridColumn Field=@nameof(Person.Id) HeaderText="Id"></GridColumn>
+                    <GridColumn Field=@nameof(Person.Name) HeaderText="Name"></GridColumn>
+                    <GridColumn Field=@nameof(Person.Email) HeaderText="Email"></GridColumn>
+                    <GridColumn Field=@nameof(Person.Age) HeaderText="Age"></GridColumn>
                     <GridColumn HeaderText="Manage Records" Width="150">
                         <GridCommandColumns>
                             <GridCommandColumn Type="CommandButtonType.Delete" ButtonOption="@(new CommandButtonOptions() {IconCss="e-icons e-delete", CssClass="e-flat" })"></GridCommandColumn>
@@ -23,9 +25,16 @@
                     </GridColumn>
                 </GridColumns>
             </SfGrid>
-            <SfButton class="btn btn-primary">
+        </div>
+        <div class="row">
+            <SfButton class="btn btn-primary" OnClick="GetPerson">
                 Получить подборку
             </SfButton>
+        </div>
+        <div class="row">
+            <h2>Подборки</h2>
+        </div>
+        <div class="row">
             <SfGrid DataSource="@group.Recomendations" AllowPaging="true">
                 <GridEditSettings AllowAdding="true" AllowDeleting="true" AllowEditing="true"></GridEditSettings>
                 <GridColumns>
@@ -43,26 +52,26 @@
     </div>
 </div>
 
-<SfTextBox Value="@currentCount1"></SfTextBox>
 
-@code {
+@code{
+    Group group { get; set; } = new Group();
     string idFriend { get; set; }
-    public Group group { get; set; } = new Group();
     Person personSelected { get; set; }
 
-    private int currentCount = 0;
-    private string currentCount1;
+    SfGrid<Person> sfGrid;
 
     private void AddFriend()
     {
         // добавить друга, сделать вызов на бек.
-        group.Persons.Add(new Person { Id = idFriend });
-        currentCount++;
-        currentCount1 = currentCount.ToString();
+        string id = idFriend;
+        var person = new Person { Id = id, Age = "18", Name = "Новый" };
+        group.Persons.Add(person);
+        sfGrid.Refresh();
     }
 
-    protected override void OnInitialized()
+    public async Task GetPerson()
     {
-
+        var result = await Http.PostAsJsonAsync<Group>($"api/Recomendation", group);
+        var s = result.Content;
     }
 }

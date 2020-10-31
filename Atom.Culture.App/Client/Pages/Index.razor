@@ -1,4 +1,5 @@
 ﻿@page "/"
+@page "/{Id}"
 @using Syncfusion.Blazor.Charts
 @using Atom.Culture.App.Components
 @using Syncfusion.Blazor.Inputs
@@ -6,7 +7,7 @@
 @using SFInputs = Syncfusion.Blazor.Inputs
 @using Syncfusion.Blazor.DropDowns
 @using Atom.Culture.App.Shared
-
+@inject HttpClient Http
 
 
 
@@ -29,14 +30,14 @@
     <MultiSelectFieldSettings Text="Name"></MultiSelectFieldSettings>
 </SfMultiSelect>
 <SfDateRangePicker Placeholder="Выберите время" Min="@MinDate" Max="@MaxDate"></SfDateRangePicker>
-<label class="userselect">Отметьте приемлемую цену билетов?</label>
+<label class="userselect">Приемлемая цена</label>
 <SfSlider Enabled="@(!Disabled)" Min="0" Max="100" Step="5" Type=SliderType.Range Value=@RangeValuePrice>
     <SliderTicksData Placement="@TicksPlacementPrice"
                      ShowSmallTicks="true"
                      LargeStep="20"
                      SmallStep="1"></SliderTicksData>
 </SfSlider>
-<label class="userselect">Сколько времени вы готовы потратить на дорогу?</label>
+<label class="userselect">Приемлемое время дороги</label>
 <SfSlider Enabled="@(!Disabled)" Min="0" Max="100" Step="5" Type=SliderType.Range Value=@RangeValueTime>
     <SliderTicksData Placement="@TicksPlacementTime"
                      ShowSmallTicks="true"
@@ -57,14 +58,45 @@
 <SfButton>
     Сохранить
 </SfButton>
+<h2>Подборки</h2>
+
+<div class="row">
+    <SfButton class="btn btn-primary" OnClick="GetPerson">
+        Получить подборку
+    </SfButton>
+</div>
+
+<SfGrid DataSource="@person.Recomendations" AllowPaging="true">
+    <GridEditSettings AllowAdding="true" AllowDeleting="true" AllowEditing="true"></GridEditSettings>
+    <GridColumns>
+        <GridColumn Field=@nameof(IRecomendation.Id) HeaderText="Id" EditType="EditType.DatePickerEdit" Format="d" Type="ColumnType.Date" TextAlign="TextAlign.Right" Width="160"></GridColumn>
+        <GridColumn Field=@nameof(IRecomendation.Name) HeaderText="Название" IsPrimaryKey="true" ValidationRules="@(new ValidationRules{ Required=true, Number=true})" TextAlign="TextAlign.Right" Width="140"></GridColumn>
+        <GridColumn Field=@nameof(IRecomendation.Price) HeaderText="Цена" ValidationRules="@(new ValidationRules{ Required=true})" Width="150"></GridColumn>
+        <GridColumn HeaderText="Manage Records" Width="150">
+            <GridCommandColumns>
+                <GridCommandColumn Type="CommandButtonType.Delete" ButtonOption="@(new CommandButtonOptions() {IconCss="e-icons e-delete", CssClass="e-flat" })"></GridCommandColumn>
+            </GridCommandColumns>
+        </GridColumn>
+    </GridColumns>
+</SfGrid>
+
 
 @code{
+
+    [Parameter]
+    public string Id { get; set; }
+
+    Person person { get; set; } = new Person();
+
     #region Загрузить данные пользователя
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            // person = await Http.GetFromJsonAsync<Person>("WeatherForecast");
+            if (Id != null || Id != "")
+            {
+                person = await Http.GetFromJsonAsync<Person>($"api/Recomendation/{Id}");
+            }
         }
         catch
         {
@@ -73,15 +105,16 @@
     }
     #endregion
 
-    public Person person { get; set; } = new Person();
-
-    SfTextBox date;
+    public async Task GetPerson()
+    {
+        person = await Http.GetFromJsonAsync<Person>($"api/Recomendation/{Id}");
+    }
 
     public DateTime MinDate = new DateTime();
     public DateTime MaxDate = new DateTime();
 
     public List<RatingsService> GridData = new List<RatingsService>()
-{
+    {
         new RatingsService{Name = "Департамент культуры города Москвы" },
         new RatingsService{Name = "Кинопоиск"},
         new RatingsService{Name = "BadComedian" }
@@ -94,29 +127,7 @@
     SFInputs.Placement TicksPlacementPrice;
     bool Disabled = false;
 
-    public class ChartData
-    {
-        public DateTime XValue { get; set; }
-        public double YValue { get; set; }
-        public double YValue1 { get; set; }
-    }
-    public List<ChartData> ConsumerDetails = new List<ChartData>
-{
-        new ChartData { XValue = new DateTime(2005, 01, 01), YValue = 21, YValue1 = 28 },
-        new ChartData { XValue = new DateTime(2006, 01, 01), YValue = 24, YValue1 = 44 },
-        new ChartData { XValue = new DateTime(2007, 01, 01), YValue = 36, YValue1 = 48 },
-        new ChartData { XValue = new DateTime(2008, 01, 01), YValue = 38, YValue1 = 50 },
-        new ChartData { XValue = new DateTime(2009, 01, 01), YValue = 54, YValue1 = 66 },
-        new ChartData { XValue = new DateTime(2010, 01, 01), YValue = 57, YValue1 = 78 },
-        new ChartData { XValue = new DateTime(2011, 01, 01), YValue = 70, YValue1 = 84 },
-    };
 
-    void ChartLoad(ILoadedEventArgs Args)
-    {
-
-        Args.Theme = ChartTheme.Bootstrap4;
-
-    }
 
     #region Пол
     private List<string> Sexes = new List<string>
