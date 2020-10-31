@@ -1,4 +1,5 @@
-﻿using Atom.CultureShared;
+﻿using Atom.Culture.App.Data.Interfaces;
+using Atom.CultureShared;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson.IO;
 using Newtonsoft.Json;
@@ -16,6 +17,14 @@ namespace Atom.Culture.PublishServer.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+
+        IUnitOfWork unitOfWork;
+
+        public ValuesController(IUnitOfWork unitOfWork)
+        {
+            this.unitOfWork = unitOfWork;
+        }
+
         // GET: api/<ValuesController>
         [HttpGet]
         public string Get()
@@ -28,7 +37,7 @@ namespace Atom.Culture.PublishServer.Controllers
         public string GetPerson(string id)
         {
             // найти пользователя и выдать о нем информацию.
-            Person person = new Person();
+            Person person = unitOfWork.Persons.GetFromDataset(id);
             person.Age = "19";
             person.Name = "Roman";
             var result = Newtonsoft.Json.JsonConvert.SerializeObject(person);

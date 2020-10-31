@@ -1,3 +1,5 @@
+using Atom.Culture.App.Data.Interfaces;
+using Atom.Culture.App.Data.Mongo;
 using Atom.Culture.PublishServer.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
@@ -28,6 +30,11 @@ namespace Atom.Culture.PublishServer
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IUnitOfWork, MongoUnitOfWork>(x =>
+            {
+                return new MongoUnitOfWork(Configuration["Database:ConnectionString"], Configuration["Database:DbName"]);
+            });
+
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
