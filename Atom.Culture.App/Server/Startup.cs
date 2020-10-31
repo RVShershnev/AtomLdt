@@ -1,5 +1,6 @@
 using Atom.Culture.App.Data;
 using Atom.Culture.App.Data.Interfaces;
+using Atom.Culture.App.Data.Services;
 using Atom.Culture.App.Server.Data;
 using Atom.Culture.App.Server.Models;
 using Microsoft.AspNetCore.Authentication;
@@ -28,8 +29,10 @@ namespace Atom.Culture.App.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            Class1 class1 = new Class1();
-            class1.test();
+            services.AddTransient<IPersonsService, PersonsService>(x =>
+            {
+                return new PersonsService(Configuration["Database:ConnectionString"], Configuration["Database:DbName"]);
+            });
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
@@ -51,8 +54,10 @@ namespace Atom.Culture.App.Server
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IPersonsService personsService)
         {
+            var person = personsService.Get("179");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
