@@ -8,14 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Syncfusion.Blazor" Version="18.3.0.44" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\Atom.Culture.App.Data\Atom.Culture.App.Data.csproj" />
     <ProjectReference Include="..\Atom.CultureShared\Atom.CultureShared.csproj" />
   </ItemGroup>
 
