@@ -12,14 +12,43 @@ namespace Atom.Culture.PublishServer.Services
         {
            
         }
-        public async Task<Person> UpdatePerson(Person message)
+        public async Task<Atom.CultureShared.Person> UpdatePerson(Atom.CultureShared.Person message)
         {
             var a = message;
-
-
             return a;
         }
-     
-     
+        public async Task<Atom.CultureShared.Person> FindPerson(string id)
+        {
+            // если пользователь не найден, то 
+            bool IsFound = false;                        
+            if (true)
+            {
+                IsFound = true;
+                Atom.CultureShared.Person person = new Atom.CultureShared.Person();
+                return person;
+            }
+            return null;
+        }
+
+        public async Task<IEnumerable<string>> FamousTags(string id)
+        {
+            List<string> tags = new List<string>();
+
+            // если пользователь не найден, то 
+            bool IsFound = false;
+            if (true)
+            {
+                IsFound = true;
+                Atom.CultureShared.Person person = new Atom.CultureShared.Person();
+               
+            }
+            return null;
+        }
+
+        public async Task<IEnumerable<string>> GetMetro(string id)
+        {
+            return Metro.GetMetro;                        
+        }
+
     }
 }
