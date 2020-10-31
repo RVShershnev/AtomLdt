@@ -43,7 +43,7 @@ namespace Atom.Culture.App.Data.Services
         public Person GetFromDataset(string id)
         {
             var reader = mongo.Readers.Find(Builders<Reader>.Filter.Eq(x => x.ReaderId, id)).FirstOrDefault();
-            var issues = mongo.Issues.Find(Builders<Issue>.Filter.Eq(x => x.ReaderIs, reader.ReaderId)).ToList().Select(x => x.BarCode);
+            var issues = mongo.Issues.Find(Builders<Issue>.Filter.Eq(x => x.ReaderId, reader.ReaderId)).ToList().Select(x => x.BarCode);
             var instances = mongo.Instances.Find(Builders<Instance>.Filter.Where(x => issues.Contains(x.BarCode))).ToList().Select(x => x.CatalogRecordId);
             var books = mongo.Books.Find(Builders<Book>.Filter.Where(x => instances.Contains(x.DocId))).ToList();
             Person person = new Person()
