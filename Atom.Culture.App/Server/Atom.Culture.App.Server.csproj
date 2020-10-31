@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Atom.Culture.App.Data\Atom.Culture.App.Data.csproj" />
     <ProjectReference Include="..\Client\Atom.Culture.App.Client.csproj" />
     <ProjectReference Include="..\Shared\Atom.Culture.App.Shared.csproj" />
   </ItemGroup>

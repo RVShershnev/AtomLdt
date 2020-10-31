@@ -1,3 +1,5 @@
+using Atom.Culture.App.Data;
+using Atom.Culture.App.Data.Interfaces;
 using Atom.Culture.App.Server.Data;
 using Atom.Culture.App.Server.Models;
 using Microsoft.AspNetCore.Authentication;
@@ -26,6 +28,9 @@ namespace Atom.Culture.App.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            Class1 class1 = new Class1();
+            class1.test();
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
