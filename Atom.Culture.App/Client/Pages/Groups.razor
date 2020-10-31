@@ -43,18 +43,22 @@
     </div>
 </div>
 
+<SfTextBox Value="@currentCount1"></SfTextBox>
+
 @code {
     string idFriend { get; set; }
     public Group group { get; set; } = new Group();
     Person personSelected { get; set; }
 
     private int currentCount = 0;
-
+    private string currentCount1;
 
     private void AddFriend()
     {
         // добавить друга, сделать вызов на бек.
-        group.Persons.Add(new Person { Id = idFriend });          
+        group.Persons.Add(new Person { Id = idFriend });
+        currentCount++;
+        currentCount1 = currentCount.ToString();
     }
 
     protected override void OnInitialized()
