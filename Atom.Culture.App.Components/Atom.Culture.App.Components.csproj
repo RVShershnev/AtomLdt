@@ -14,8 +14,4 @@
     <PackageReference Include="Syncfusion.Blazor" Version="18.3.0.42" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Atom.Culture.App\Shared\Atom.Culture.App.Shared.csproj" />
-  </ItemGroup>
-
 </Project>

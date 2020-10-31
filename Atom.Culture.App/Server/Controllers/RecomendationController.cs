@@ -14,31 +14,31 @@ namespace Atom.Culture.App.Server.Controllers
     public class RecomendationController : Controller
     {
      
-        public RecomendationController()
-        {
+        //public RecomendationController()
+        //{
         
-        }
+        //}
 
-        [HttpGet("{id}")]
-        public Person Get(int id)
-        {
-            var result = new Person();
-            result.Recomendations = new List<IRecomendation>();
-            return result;
-        }
+        //[HttpGet("{id}")]
+        //public Person Get(int id)
+        //{
+        //    var result = new Person();
+        //    result.Recomendations = new List<IRecomendation>();
+        //    return result;
+        //}
 
-        // POST api/recomendation/rec
-        [HttpPost]
-        public bool SendPerson(int id, [FromBody] Group value)
-        {
-            return true;
-        }
+        //// POST api/recomendation/rec
+        //[HttpPost]
+        //public bool SendPerson(int id, [FromBody] Group value)
+        //{
+        //    return true;
+        //}
 
-        // POST api/recomendation/rec
-        [HttpPost]
-        public bool SendPerson([FromBody] Person value)
-        {
-            return true;
-        }
+        //// POST api/recomendation/rec
+        //[HttpPost]
+        //public bool SendPerson([FromBody] Person value)
+        //{
+        //    return true;
+        //}
     }
 }

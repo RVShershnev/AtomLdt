@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Atom.Culture.App.Components\Atom.Culture.App.Components.csproj" />
-    <ProjectReference Include="..\Shared\Atom.Culture.App.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

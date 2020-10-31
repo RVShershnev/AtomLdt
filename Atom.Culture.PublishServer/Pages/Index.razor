@@ -1,7 +1,158 @@
 ﻿@page "/"
+@page "/{Id}"
+@using Syncfusion.Blazor.Charts
+@using Syncfusion.Blazor.Inputs
+@using Syncfusion.Blazor.Buttons
+@using SFInputs = Syncfusion.Blazor.Inputs
+@using Syncfusion.Blazor.DropDowns
+@using Atom.CultureShared
 
-<h1>Hello, world!</h1>
 
-Welcome to your new app.
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<h2>Персональная информация</h2>
+<SfTextBox CssClass="e-rtl" Placeholder="Id" FloatLabelType="@FloatLabelType.Auto"></SfTextBox>
+
+<SfTextBox CssClass="e-rtl" Placeholder="Имя" FloatLabelType="@FloatLabelType.Auto"></SfTextBox>
+
+<SfTextBox CssClass="e-rtl" Placeholder="Email" FloatLabelType="@FloatLabelType.Auto"></SfTextBox>
+
+<SfDatePicker CssClass="e-rtl" TValue="DateTime?" Placeholder="Дата рождения"></SfDatePicker>
+
+<SfComboBox TValue="string" CssClass="e-rtl" Value="@person.Sex" TItem="string" Placeholder="Пол" AllowFiltering="true" DataSource="@Sexes">
+    <ComboBoxFieldSettings Text="Name" Value="Code"></ComboBoxFieldSettings>
+</SfComboBox>
+
+<h2>Индивидуальные предпочтения</h2>
+
+<SfMultiSelect TValue="string[]" Value="@person.Tags" Placeholder="Выберите теги" DataSource="@Country" AllowCustomValue="true" Mode="@VisualMode.Box">
+    <MultiSelectFieldSettings Text="Name"></MultiSelectFieldSettings>
+</SfMultiSelect>
+<SfDateRangePicker Placeholder="Выберите время" Min="@MinDate" Max="@MaxDate"></SfDateRangePicker>
+<label class="userselect">Приемлемая цена</label>
+<SfSlider Enabled="@(!Disabled)" Min="0" Max="100" Step="5" Type=SliderType.Range Value=@RangeValuePrice>
+    <SliderTicksData Placement="@TicksPlacementPrice"
+                     ShowSmallTicks="true"
+                     LargeStep="20"
+                     SmallStep="1"></SliderTicksData>
+</SfSlider>
+<label class="userselect">Приемлемое время дороги</label>
+<SfSlider Enabled="@(!Disabled)" Min="0" Max="100" Step="5" Type=SliderType.Range Value=@RangeValueTime>
+    <SliderTicksData Placement="@TicksPlacementTime"
+                     ShowSmallTicks="true"
+                     LargeStep="20"
+                     SmallStep="1"></SliderTicksData>
+</SfSlider>
+
+<h2>Рейтинги</h2>
+<SfGrid DataSource="@GridData" Toolbar="@(new List<string>() { "Поиск" })" AllowPaging="true" AllowFiltering="true">
+    <GridColumns>
+        <GridColumn Type="ColumnType.CheckBox" AllowFiltering="false" AllowSorting="false" Width="60"></GridColumn>
+        <GridColumn Field=@nameof(RatingsService.Name) IsPrimaryKey="true" HeaderText="Inventor Name" Width="180"></GridColumn>
+        <GridColumn Field=@nameof(RatingsService.Source) HeaderText="Number of Patent Families" TextAlign="TextAlign.Right" Width="195"></GridColumn>
+        <GridColumn Field=@nameof(RatingsService.Description) HeaderText="Country" Width="120"></GridColumn>
+    </GridColumns>
+</SfGrid>
+
+<SfButton>
+    Сохранить
+</SfButton>
+<h2>Подборки</h2>
+
+<div class="row">
+    <SfButton class="btn btn-primary" OnClick="GetPerson">
+        Получить подборку
+    </SfButton>
+</div>
+
+<SfGrid DataSource="@person.Recomendations" AllowPaging="true">
+    <GridEditSettings AllowAdding="true" AllowDeleting="true" AllowEditing="true"></GridEditSettings>
+    <GridColumns>
+        <GridColumn Field=@nameof(IRecomendation.Id) HeaderText="Id" EditType="EditType.DatePickerEdit" Format="d" Type="ColumnType.Date" TextAlign="TextAlign.Right" Width="160"></GridColumn>
+        <GridColumn Field=@nameof(IRecomendation.Name) HeaderText="Название" IsPrimaryKey="true" ValidationRules="@(new ValidationRules{ Required=true, Number=true})" TextAlign="TextAlign.Right" Width="140"></GridColumn>
+        <GridColumn Field=@nameof(IRecomendation.Price) HeaderText="Цена" ValidationRules="@(new ValidationRules{ Required=true})" Width="150"></GridColumn>
+        <GridColumn HeaderText="Manage Records" Width="150">
+            <GridCommandColumns>
+                <GridCommandColumn Type="CommandButtonType.Delete" ButtonOption="@(new CommandButtonOptions() {IconCss="e-icons e-delete", CssClass="e-flat" })"></GridCommandColumn>
+            </GridCommandColumns>
+        </GridColumn>
+    </GridColumns>
+</SfGrid>
+
+
+@code{
+
+    [Parameter]
+    public string Id { get; set; }
+
+    Person person { get; set; } = new Person();
+
+    #region Загрузить данные пользователя
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            if (Id != null || Id != "")
+            {
+                //person = await Http.GetFromJsonAsync<Person>($"api/Recomendation/{Id}");
+            }
+        }
+        catch
+        {
+            person = new Person();
+        }
+    }
+    #endregion
+
+    public async Task GetPerson()
+    {
+       // person = await Http.GetFromJsonAsync<Person>($"api/Recomendation/{Id}");
+    }
+
+    public DateTime MinDate = new DateTime();
+    public DateTime MaxDate = new DateTime();
+
+    public List<RatingsService> GridData = new List<RatingsService>()
+{
+        new RatingsService{Name = "Департамент культуры города Москвы" },
+        new RatingsService{Name = "Кинопоиск"},
+        new RatingsService{Name = "BadComedian" }
+    };
+
+    public int[] RangeValueTime = { 0, 100 };
+    SFInputs.Placement TicksPlacementTime;
+
+    public int[] RangeValuePrice = { 0, 100 };
+    SFInputs.Placement TicksPlacementPrice;
+    bool Disabled = false;
+
+
+
+    #region Пол
+    private List<string> Sexes = new List<string>
+{
+        "Мужской",
+        "Женский",
+        "Другое"
+    };
+
+
+
+    #endregion
+    #region Теги рекомендаций
+
+    public class RecomendationTag
+    {
+        public string Name { get; set; }
+    }
+    private List<RecomendationTag> Country = new List<RecomendationTag>
+{
+        new RecomendationTag() { Name = "Биология"},
+        new RecomendationTag() { Name = "Химия"},
+        new RecomendationTag() { Name = "Семья"},
+        new RecomendationTag() { Name = "История XX века"},
+        new RecomendationTag() { Name = "История Руси" },
+        new RecomendationTag() { Name = "Иван Грозный" }
+    };
+    #endregion
+}
+
